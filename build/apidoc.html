@@ -61,12 +61,119 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.gulp-nodemon">module gulp-nodemon</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-nodemon.gulp-nodemon">
+            function <span class="apidocSignatureSpan"></span>gulp-nodemon
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.gulp-nodemon" id="apidoc.module.gulp-nodemon">module gulp-nodemon</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-nodemon.gulp-nodemon" id="apidoc.element.gulp-nodemon.gulp-nodemon">
+        function <span class="apidocSignatureSpan"></span>gulp-nodemon
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">gulp-nodemon = function (options) {
+  options = options || {};
+
+  // plug nodemon
+  if (options.nodemon &#x26;&#x26; typeof options.nodemon === &#x27;function&#x27;) {
+    nodemon = options.nodemon
+    delete options.nodemon
+  } else {
+    nodemon = require(&#x27;nodemon&#x27;)
+  }
+
+  // Our script
+  var script            = nodemon(options)
+    , originalOn        = script.on
+    , originalListeners = bus.listeners(&#x27;restart&#x27;)
+
+  // Allow for injection of tasks on file change
+  if (options.tasks) {
+    // Remove all &#x27;restart&#x27; listeners
+    bus.removeAllListeners(&#x27;restart&#x27;)
+
+    // Place our listener in first position
+    bus.on(&#x27;restart&#x27;, function (files){
+      if (!options.quiet) nodemonLog(&#x27;running tasks...&#x27;)
+
+      if (typeof options.tasks === &#x27;function&#x27;) run(options.tasks(files))
+      else run(options.tasks)
+    })
+
+    // Re-add all other listeners
+    for (var i = 0; i &#x3c; originalListeners.length; i++) {
+      bus.on(&#x27;restart&#x27;, originalListeners[i])
+    }
+  }
+
+  // Capture ^C
+  var exitHandler = function (options){
+    if (options.exit) script.emit(&#x27;exit&#x27;)
+    if (options.quit) process.exit(0)
+  }
+  process.once(&#x27;exit&#x27;, exitHandler.bind(null, { exit: true }))
+  process.once(&#x27;SIGINT&#x27;, exitHandler.bind(null, { quit: true }))
+
+  // Forward log messages and stdin
+  script.on(&#x27;log&#x27;, function (log){
+    nodemonLog(log.message)
+  })
+
+  // Shim &#x27;on&#x27; for use with gulp tasks
+  script.on = function (event, tasks){
+    var tasks = Array.prototype.slice.call(arguments)
+      , event = tasks.shift()
+
+    if (event === &#x27;change&#x27;) {
+      script.changeTasks = tasks
+    } else {
+      for (var i = 0; i &#x3c; tasks.length; i++) {
+        void function (tasks){
+          if (tasks instanceof Function) {
+            originalOn(event, tasks)
+          } else {
+            originalOn(event, function (){
+              if (Array.isArray(tasks)) {
+                tasks.forEach(function (task){
+                  run(task)
+                })
+              } else run(tasks)
+            })
+          }
+        }(tasks[i])
+      }
+    }
+
+    return script
+  }
+
+  return script
+
+  // Synchronous alternative to gulp.run()
+  function run(tasks) {
+    if (typeof tasks === &#x27;string&#x27;) tasks = [tasks]
+    if (tasks.length === 0) return
+    if (!(tasks instanceof Array)) throw new Error(&#x27;Expected task name or array but found: &#x27; + tasks)
+    cp.spawnSync(process.platform === &#x27;win32&#x27; ? &#x27;gulp.cmd&#x27; : &#x27;gulp&#x27;, tasks, { stdio: [0, 1, 2] })
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 

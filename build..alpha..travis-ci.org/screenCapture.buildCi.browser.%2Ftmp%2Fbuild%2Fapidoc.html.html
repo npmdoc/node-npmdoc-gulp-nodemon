@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/JacksonGariety/gulp-nodemon"
-
-    >gulp-nodemon (v2.2.1)</a>
+    <a href="https://github.com/JacksonGariety/gulp-nodemon">gulp-nodemon (v2.2.1)</a>
 </h1>
 <h4>it's gulp + nodemon + convenience</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.gulp-nodemon">module gulp-nodemon</a><ol>
 
@@ -89,59 +82,59 @@
   options = options || {};
 
   // plug nodemon
-  if (options.nodemon &#x26;&#x26; typeof options.nodemon === &#x27;function&#x27;) {
+  if (options.nodemon &amp;&amp; typeof options.nodemon === 'function') {
     nodemon = options.nodemon
     delete options.nodemon
   } else {
-    nodemon = require(&#x27;nodemon&#x27;)
+    nodemon = require('nodemon')
   }
 
   // Our script
   var script            = nodemon(options)
     , originalOn        = script.on
-    , originalListeners = bus.listeners(&#x27;restart&#x27;)
+    , originalListeners = bus.listeners('restart')
 
   // Allow for injection of tasks on file change
   if (options.tasks) {
-    // Remove all &#x27;restart&#x27; listeners
-    bus.removeAllListeners(&#x27;restart&#x27;)
+    // Remove all 'restart' listeners
+    bus.removeAllListeners('restart')
 
     // Place our listener in first position
-    bus.on(&#x27;restart&#x27;, function (files){
-      if (!options.quiet) nodemonLog(&#x27;running tasks...&#x27;)
+    bus.on('restart', function (files){
+      if (!options.quiet) nodemonLog('running tasks...')
 
-      if (typeof options.tasks === &#x27;function&#x27;) run(options.tasks(files))
+      if (typeof options.tasks === 'function') run(options.tasks(files))
       else run(options.tasks)
     })
 
     // Re-add all other listeners
-    for (var i = 0; i &#x3c; originalListeners.length; i++) {
-      bus.on(&#x27;restart&#x27;, originalListeners[i])
+    for (var i = 0; i &lt; originalListeners.length; i++) {
+      bus.on('restart', originalListeners[i])
     }
   }
 
   // Capture ^C
   var exitHandler = function (options){
-    if (options.exit) script.emit(&#x27;exit&#x27;)
+    if (options.exit) script.emit('exit')
     if (options.quit) process.exit(0)
   }
-  process.once(&#x27;exit&#x27;, exitHandler.bind(null, { exit: true }))
-  process.once(&#x27;SIGINT&#x27;, exitHandler.bind(null, { quit: true }))
+  process.once('exit', exitHandler.bind(null, { exit: true }))
+  process.once('SIGINT', exitHandler.bind(null, { quit: true }))
 
   // Forward log messages and stdin
-  script.on(&#x27;log&#x27;, function (log){
+  script.on('log', function (log){
     nodemonLog(log.message)
   })
 
-  // Shim &#x27;on&#x27; for use with gulp tasks
+  // Shim 'on' for use with gulp tasks
   script.on = function (event, tasks){
     var tasks = Array.prototype.slice.call(arguments)
       , event = tasks.shift()
 
-    if (event === &#x27;change&#x27;) {
+    if (event === 'change') {
       script.changeTasks = tasks
     } else {
-      for (var i = 0; i &#x3c; tasks.length; i++) {
+      for (var i = 0; i &lt; tasks.length; i++) {
         void function (tasks){
           if (tasks instanceof Function) {
             originalOn(event, tasks)
@@ -165,10 +158,10 @@
 
   // Synchronous alternative to gulp.run()
   function run(tasks) {
-    if (typeof tasks === &#x27;string&#x27;) tasks = [tasks]
+    if (typeof tasks === 'string') tasks = [tasks]
     if (tasks.length === 0) return
-    if (!(tasks instanceof Array)) throw new Error(&#x27;Expected task name or array but found: &#x27; + tasks)
-    cp.spawnSync(process.platform === &#x27;win32&#x27; ? &#x27;gulp.cmd&#x27; : &#x27;gulp&#x27;, tasks, { stdio: [0, 1, 2] })
+    if (!(tasks instanceof Array)) throw new Error('Expected task name or array but found: ' + tasks)
+    cp.spawnSync(process.platform === 'win32' ? 'gulp.cmd' : 'gulp', tasks, { stdio: [0, 1, 2] })
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -183,3 +176,4 @@
     ]
 </div>
 </div>
+</body></html>
