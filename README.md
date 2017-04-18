@@ -1,9 +1,14 @@
-# api documentation for  [gulp-nodemon (v2.2.1)](https://github.com/JacksonGariety/gulp-nodemon)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-nodemon.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-nodemon) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-nodemon.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-nodemon)
+# npmdoc-gulp-nodemon
+
+#### api documentation for  [gulp-nodemon (v2.2.1)](https://github.com/JacksonGariety/gulp-nodemon)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-nodemon.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-nodemon) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-nodemon.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-nodemon)
+
 #### it's gulp + nodemon + convenience
 
-[![NPM](https://nodei.co/npm/gulp-nodemon.png?downloads=true)](https://www.npmjs.com/package/gulp-nodemon)
+[![NPM](https://nodei.co/npm/gulp-nodemon.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/gulp-nodemon)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-gulp-nodemon/build/screenCapture.buildNpmdoc.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmdoc%252Fnode-npmdoc-gulp-nodemon%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-gulp-nodemon/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-gulp-nodemon/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-gulp-nodemon/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-gulp-nodemon/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-gulp-nodemon/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-gulp-nodemon/build/screenCapture.npmPackageListing.svg)
 
@@ -60,13 +65,11 @@
     "main": "index.js",
     "maintainers": [
         {
-            "name": "jacksongariety",
-            "email": "personal@jacksongariety.com"
+            "name": "jacksongariety"
         }
     ],
     "name": "gulp-nodemon",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/JacksonGariety/gulp-nodemon.git"
@@ -77,16 +80,6 @@
     "version": "2.2.1"
 }
 ```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module gulp-nodemon](#apidoc.module.gulp-nodemon)
-
-
-
-# <a name="apidoc.module.gulp-nodemon"></a>[module gulp-nodemon](#apidoc.module.gulp-nodemon)
 
 
 
